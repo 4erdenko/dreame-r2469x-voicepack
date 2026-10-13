@@ -1,3 +1,5 @@
 * text=auto eol=lf
+# Keep CRLF in the blob so Download ZIP preserves a valid Windows launcher.
+start.cmd -text whitespace=cr-at-eol
 *.ogg binary
 *.tar.gz binary

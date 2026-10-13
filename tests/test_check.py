@@ -1,6 +1,8 @@
 import copy
 import json
+import os
 from pathlib import Path
+import subprocess
 import sys
 import unittest
 
@@ -20,6 +22,25 @@ class ValidationTests(unittest.TestCase):
 
     def test_current_repository(self):
         validate(ROOT)
+
+    def test_windows_launcher_preserves_crlf(self):
+        data = (ROOT / "start.cmd").read_bytes()
+        self.assertTrue(data.endswith(b"\r\n"))
+        self.assertNotIn(b"\n", data.replace(b"\r\n", b""))
+        self.assertFalse(data.startswith(b"\xef\xbb\xbf"))
+
+    @unittest.skipUnless(os.name == "nt", "Requires Windows cmd.exe")
+    def test_windows_launcher_runs_once_in_each_language(self):
+        for language in ("en", "ru"):
+            with self.subTest(language=language):
+                messages = json.loads((ROOT / "installer" / f"messages.{language}.json").read_text(encoding="utf-8"))
+                result = subprocess.run(
+                    [os.environ["COMSPEC"], "/d", "/c", "start.cmd", "check", "--lang", language],
+                    cwd=ROOT, input="", capture_output=True, encoding="utf-8", timeout=30,
+                )
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                self.assertEqual(result.stdout.strip(), messages["check_ok"])
+                self.assertEqual(result.stderr, "")
 
     def test_wrong_sample_rate_is_rejected(self):
         data = bytearray(self.audio)
