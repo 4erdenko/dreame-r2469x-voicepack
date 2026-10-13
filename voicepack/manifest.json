@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "release": "1.0.0-rc1",
+  "title": "Leather Bastards Maxim RU 18+",
+  "target": {
+    "model": "dreame.vacuum.r2469x",
+    "tested_firmware": [
+      "4.3.9_1642"
+    ],
+    "tested_cloud": "Dreamehome",
+    "tested_regions": [
+      "eu"
+    ],
+    "tested_devices": 1
+  },
+  "package": {
+    "file": "leather-maxim-r2469x-full-ru.tar.gz",
+    "language": "RU",
+    "size": 12729248,
+    "md5": "b2bd6b51f01988b3f49388dda85b4613",
+    "sha256": "85803539a3ae2c83ae8daccdfcd557770e37ea652a1ca2090fb457c6929c1fa1",
+    "member_count": 570,
+    "audio_slots": 564,
+    "speech_slots": 556,
+    "original_tones": 8,
+    "unique_audio": 501,
+    "unique_seconds": 2504.851
+  },
+  "protocol": {
+    "service": 7,
+    "install_property": 4,
+    "status_property": 3,
+    "active_language_property": 2,
+    "find_action": 1,
+    "pack_id": "RU"
+  },
+  "stock_restore": {
+    "id": "RU",
+    "url": "https://oss.iot.dreame.life/dreame-product/resources/4edabec3b754377f5890f69f3f98283d",
+    "md5": "4edabec3b754377f5890f69f3f98283d",
+    "sha256": "09132d51110beed079c18e19fa6687a89a5b6bac7b4392152c92a228f404997e",
+    "size": 9150229
+  },
+  "evidence": {
+    "latest_package_install_status": "success",
+    "latest_package_progress": 100,
+    "latest_package_device_error": 0,
+    "custom_probe_audible_confirmation": true,
+    "latest_revised_events_audible_confirmation": false,
+    "persistence_after_reboot": "not_tested",
+    "robovoice_install": "not_tested",
+    "mindsolo_install": "not_tested"
+  },
+  "audio_license": "NOASSERTION"
+}

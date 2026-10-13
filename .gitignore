@@ -1,0 +1,13 @@
+.my_local_dev/
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+.env
+.env.*
+.idea/
+.vscode/
+*.pem
+*.key
+*.log
+.storage/
