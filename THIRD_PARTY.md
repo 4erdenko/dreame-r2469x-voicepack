@@ -1,5 +1,7 @@
 # Third-party code
 
+[← Home](README.md) · **English** · [Русский](THIRD_PARTY.ru.md)
+
 The Dreamehome protocol client in `installer/cloud.py` is adapted from
 [RoboVoice](https://github.com/SashaEee/Trouver_audio_install), commit
 `72399a7754e02186476e73f0bc09357c31bccafe`, `app/dreame_client.py`.

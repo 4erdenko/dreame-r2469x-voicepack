@@ -1,30 +1,78 @@
-# Установка и откат
+# Install & restore
 
-1. Установите [Python 3.11+](https://www.python.org/downloads/), скачайте ZIP репозитория и распакуйте его в доступную для записи папку.
-2. Подключите компьютер и пылесос к одной домашней сети. Поставьте робот на базу: заряд от 50%, без уборки, ошибок и обновления.
-3. Откройте `start.command` на macOS, `start.cmd` на Windows или выполните `sh start.sh` на Linux.
-4. Введите логин и пароль **Dreamehome EU**, выберите пылесос и действие. Пароль вводится скрыто и не сохраняется.
+[← Home](../README.md) · **English** · [Русский](installation.ru.md)
 
-Можно запустить напрямую: `python3 voicepack.py` (Windows: `py -3 voicepack.py`).
+The pack and its transcripts are in Russian. Changing the interface language does not change the audio.
 
-## Установить
+## 1. Prepare
 
-Скрипт проверит модель, прошивку и архив, сохранит комплект отката. Подтвердите локальный IPv4 компьютера и установку. Файл раздаётся только в домашней сети и только до завершения операции. Разрешите Python входящие подключения в частной сети, если система спросит.
+- Install [Python 3.11+](https://www.python.org/downloads/), download this repository as a ZIP, and extract it into a writable folder.
+- Connect the computer and robot to the same home network. Internet access is also required.
+- Dock the robot and charge it to at least **50%**. Stop cleaning and wait for any update to finish.
+- Check your profile: **L10s Ultra Gen 2 · `r2469x` · `4.3.9_1642` · Dreamehome EU**.
 
-Не закрывайте окно. После нового успешного статуса запустите предложенную проверку звука: **«Надеюсь, удастся тихо прошмыгнуть»** голосом Maxim. Одно принятие команды или старые 100% успехом не считаются.
+## 2. Launch
 
-## Бэкап и откат
+| System | Open or run |
+|---|---|
+| macOS | `start.command` |
+| Windows | `start.cmd` |
+| Linux | `sh start.sh` |
 
-**«Сохранить комплект отката»** скачивает официальный русский пакет, проверяет его хеши и сохраняет состояние робота в `.my_local_dev/backups/`. Это не выгрузка текущих аудиофайлов: проверенный протокол не предоставляет такой операции. Сохраняйте эту папку при переносе скрипта.
+Choose **English** or **Русский**, then enter your Dreamehome login and password.
+The password is hidden while you type and is not saved.
 
-**«Вернуть штатный русский голос»** проверяет локальную копию и устанавливает её на тот же робот. Вернуть произвольную предыдущую кастомную озвучку этим способом нельзя. Штатный архив сохраняется побайтно вместе с его техническими файлами.
+If the launcher does not open, use `python3 voicepack.py` in that folder. On Windows, use `py -3 voicepack.py`.
 
-## Если возникла ошибка
+## 3. Install
 
-- Нет Python — установите его по ссылке выше. Если на macOS ошибка сертификатов, выполните `Install Certificates.command` из установленного Python; проверку TLS не отключайте.
-- Нет устройства — проверьте аккаунт и регион EU. Другие модели и прошивки скрипт не устанавливает.
-- Робот не скачивает файл — проверьте IPv4, VPN, гостевую изоляцию Wi-Fi и брандмауэр компьютера. Не открывайте порт на роутере в интернет.
-- Результат неизвестен — не повторяйте запись; новая установка блокируется локально. Проверьте Dreamehome и дождитесь окончания загрузки. Сервер файла продолжает работать до нажатия Enter.
-- Для снятия блокировки после проверки: `python3 voicepack.py clear-pending` (Windows: `py -3 voicepack.py clear-pending`). Потребуются повторная проверка состояния и явное подтверждение. Это не подтверждает успех прошлой операции и ничего не устанавливает.
+Choose **1 — Install voice pack**. The script checks the pack and robot, then saves a recovery kit.
 
-[Проверенная совместимость и ограничения](compatibility.md)
+Confirm the computer's local IP address and the installation. Allow Python incoming connections on your **private network** if the firewall asks. Keep the window open until the operation finishes.
+
+When prompted, play the test phrase. You should hear Maxim say:
+
+> «Надеюсь, удастся тихо прошмыгнуть»
+> — “I hope I can sneak past quietly.”
+
+A successful status still needs an audible check. [What has been tested →](compatibility.md)
+
+## Backup & restore
+
+| Menu option | What it does |
+|---|---|
+| **2 — Save recovery kit** | Downloads and verifies the official Russian voice pack; saves the robot's state. |
+| **3 — Restore stock Russian voice** | Verifies the saved pack and installs it on the same robot. |
+
+Keep `.my_local_dev/backups/` if you move the installer to another folder or computer.
+This kit restores the stock voice: it cannot extract or restore an arbitrary custom voice previously on the robot. The vendor archive is kept byte for byte.
+
+## Need help?
+
+| Problem | What to do |
+|---|---|
+| Python is missing | Install Python 3.11+ using the link above. |
+| Certificate error on macOS | Run `Install Certificates.command` from your Python installation. Keep TLS verification enabled. |
+| Robot is missing or unsupported | Check the account, EU region, model and firmware in Dreamehome. |
+| Robot cannot download the pack | Check the computer's IP address, VPN, firewall and guest Wi-Fi isolation. No router port forwarding is needed. |
+| Result is unknown | Wait for the download to finish in Dreamehome. Keep this window open; press Enter only after the download has finished. Do not start another installation or restore. |
+
+<details>
+<summary>Clear a pending operation</summary>
+
+First check in Dreamehome that the previous download has ended. Then run:
+
+```sh
+python3 voicepack.py clear-pending --lang en
+```
+
+On Windows, replace `python3` with `py -3`. The script checks the robot again and asks for confirmation. Clearing the local lock does not install anything or prove that the previous operation succeeded.
+
+</details>
+
+<details>
+<summary>Choose the language from the command line</summary>
+
+Use `python3 voicepack.py --lang en` for English or `python3 voicepack.py --lang ru` for Russian.
+
+</details>

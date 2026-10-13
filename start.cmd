@@ -13,6 +13,8 @@ if not errorlevel 1 (
     goto finish
 )
 echo Install Python 3.11+ from https://www.python.org/downloads/
+echo Установите Python 3.11+ по ссылке выше.
+pause
 exit /b 1
 :finish
 set result=%errorlevel%

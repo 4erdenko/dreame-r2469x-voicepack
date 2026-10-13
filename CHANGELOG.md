@@ -1,15 +1,20 @@
-# Изменения
+# Changelog
 
-## 1.0.0-rc1 — подготовка первого выпуска
+[← Home](README.md) · **English** · [Русский](CHANGELOG.ru.md)
 
-- Добавлен локальный установщик для macOS, Windows и Linux без сторонних библиотек.
-- Комплект отката: проверенный штатный RU-архив и состояние устройства.
-- Повторная запись блокируется при неизвестном результате; пароль не сохраняется.
+## Unreleased
 
-- Полный каталог r2469x: 556 речевых событий и 8 сигналов.
-- Добавлены сообщения станции, промывки, сушки и обслуживания голосом Maxim.
-- Исправлены десять событий, включая путаницу сухой и влажной уборки.
-- Вычитана 51 расшифровка исходных записей.
-- Сохранены исходные номера, перенаправления и служебные файлы.
+- Separate English and Russian guides, with a shorter home page.
+- Language selection in the installer; English and Russian prompts and errors.
 
-Пакет установлен на проверенном устройстве. Публичный релиз пока не опубликован.
+## 1.0.0-rc1
+
+- Local installer for macOS, Windows and Linux, with no third-party dependencies.
+- Recovery kit: verified stock Russian archive and a robot state snapshot.
+- Pending-operation lock after an unknown outcome; passwords are never saved.
+- Full r2469x catalog: 556 spoken events and eight sound effects.
+- Maxim lines for the dock, mop washing, drying and maintenance.
+- Ten corrected events, including vacuuming/mopping confusion; 51 source transcripts proofread.
+- Original event IDs, redirects and vendor files preserved.
+
+The pack was installed on the tested device. No public release has been published.

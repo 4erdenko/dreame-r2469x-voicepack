@@ -1,27 +1,32 @@
-# Совместимость
+# Compatibility
 
-Испытано одно устройство: **L10s Ultra Gen 2 · `dreame.vacuum.r2469x` · `4.3.9_1642` · Dreamehome EU**.
+[← Home](../README.md) · **English** · [Русский](compatibility.ru.md)
 
-| Проверка | Результат |
+**One device tested:** L10s Ultra Gen 2 · `dreame.vacuum.r2469x` · firmware `4.3.9_1642` · Dreamehome EU.
+
+| Check | Result |
 |---|---|
-| Контрольная кастомная фраза | Установка и воспроизведение подтверждены |
-| Предыдущий частичный Maxim-пакет | Установка и новая фраза поиска подтверждены |
-| Полный исправленный пакет | Новый переход `downloading → success`, 100%, ошибка 0 |
-| Десять исправленных событий на роботе | Отдельно не прослушаны |
-| Возврат штатного RU после контрольного пакета | `success`, 100%; звук отдельно не подтверждался |
-| Сохранение после перезагрузки | Не проверено |
-| Другие устройства, прошивки, регионы и установщики | Не проверены |
+| Custom test phrase | Installation and playback confirmed |
+| Earlier partial Maxim pack | Installation and new find-me phrase confirmed |
+| Full corrected pack | New `downloading → success` transition, 100%, error 0 |
+| Ten revised events on the robot | Not individually listened to |
+| Stock RU restore after the test pack | `success`, 100%; sound not separately confirmed |
+| Persistence after a reboot | Not tested |
+| Other devices, firmware, regions or installers | Not tested |
 
-Установка пакета проверена через облачный протокол. Root и перепрошивка не потребовались.
+The pack was installed through the cloud protocol. No root access or firmware flashing was required.
 
-Для нового локального скрипта проверены вход, список устройств и чтение состояния реального робота. Полный цикл установки и отката через его локальный HTTP-сервер ещё не испытан; успешные тесты кода не заменяют такую проверку.
+The new local script has been tested for login, device discovery, state reads and saving a stock recovery kit on the real robot. Its full install and restore cycle through the local HTTP server has **not been tested on the device**. Automated tests do not replace that check.
 
-## Формат и протокол
+<details>
+<summary>Package format & protocol</summary>
 
-- Архив: 564 Ogg Vorbis, 16 кГц, моно; пять JSON и `time.txt` из официального пакета.
-- Служба MIoT `7`: язык — свойство `2`, статус — `3`, установка — `4`, поиск — действие `1`.
-- Значение установки: JSON-строка с `id`, `url`, `md5`, `size`; `id = RU`.
-- Нужны новый успешный статус и проверка звука. Старое `success` не подтверждает новую установку.
-- Исходные перенаправления сохранены: `298→305`, `112→825`, `140→826`, `17→812`, `19→811`.
+- Archive: 564 mono Ogg Vorbis files at 16 kHz; five JSON files and `time.txt` from the official pack.
+- MIoT service `7`: language property `2`, status `3`, install `4`, find-me action `1`.
+- Install value: a JSON string containing `id`, `url`, `md5`, `size`; `id = RU`.
+- A fresh success status and an audible check are required. A previous `success` does not confirm a new installation.
+- Original redirects: `298→305`, `112→825`, `140→826`, `17→812`, `19→811`.
 
-Контрольные суммы, параметры и штатный пакет: [manifest.json](../voicepack/manifest.json).
+Checksums, parameters and stock package: [manifest.json](../voicepack/manifest.json).
+
+</details>

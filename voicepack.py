@@ -18,7 +18,21 @@ from scripts.check import validate
 
 ROOT = Path(__file__).resolve().parent
 LOCAL = ROOT / ".my_local_dev"
-MESSAGES = json.loads((ROOT / "installer/messages.ru.json").read_text(encoding="utf-8"))
+MESSAGES = json.loads((ROOT / "installer/messages.en.json").read_text(encoding="utf-8"))
+
+
+def set_language(language):
+    global MESSAGES
+    MESSAGES = json.loads((ROOT / "installer" / f"messages.{language}.json").read_text(encoding="utf-8"))
+
+
+def choose_language():
+    while True:
+        selected = ask("language_prompt") or "1"
+        if selected in ("1", "2"):
+            set_language("en" if selected == "1" else "ru")
+            return
+        say("language_invalid")
 
 
 def say(key, **values):
@@ -47,7 +61,11 @@ def execute(action, client, device, manifest):
     state = client.snapshot(info)
     pending = pending_path(LOCAL, info)
     if action == "status":
-        print(json.dumps(state, ensure_ascii=False, indent=2))
+        voice = state["voice"]
+        percent = voice.get("progress")
+        say("status", **{key: state[key] for key in ("battery", "language", "state", "error")},
+            voice_state=MESSAGES.get("voice_" + str(voice.get("state")), MESSAGES["voice_unknown"]),
+            voice_progress=percent if type(percent) is int and 0 <= percent <= 100 else "?")
         if pending.exists():
             say("pending_exists")
         return
@@ -102,17 +120,26 @@ def execute(action, client, device, manifest):
 
 
 def main():
+    language_parser = argparse.ArgumentParser(add_help=False)
+    language_parser.add_argument("--lang", choices=("en", "ru"))
+    language_args, _ = language_parser.parse_known_args()
+    set_language(language_args.lang or "en")
     if sys.version_info < (3, 11):
         say("python_required")
         return 1
-    parser = argparse.ArgumentParser(description="Local Dreame r2469x voice installer")
+    parser = argparse.ArgumentParser(description=MESSAGES["cli_description"], add_help=False)
+    parser.add_argument("-h", "--help", action="help", help=MESSAGES["cli_help"])
+    parser.add_argument("--lang", choices=("en", "ru"), help=MESSAGES["cli_language"])
     parser.add_argument("action", nargs="?", default="menu", choices=(
         "menu", "check", "status", "backup", "install", "restore", "locate", "clear-pending",
-    ))
+    ), help=MESSAGES["cli_action"])
     args = parser.parse_args()
     if args.action == "check":
-        print(validate(ROOT))
+        validate(ROOT)
+        say("check_ok")
         return 0
+    if not args.lang:
+        choose_language()
     manifest = json.loads((ROOT / "voicepack/manifest.json").read_text(encoding="utf-8"))
     say("intro")
     username = ask("username")

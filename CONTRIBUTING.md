@@ -1,14 +1,28 @@
-# Проверки
+# Development
 
-Python 3.11+, без дополнительных библиотек:
+[← Home](README.md) · **English** · [Русский](CONTRIBUTING.ru.md)
+
+## Run checks
+
+Python 3.11+, with no additional dependencies:
 
 ```sh
-python3 voicepack.py check
+python3 voicepack.py check --lang en
 python3 -m unittest discover -s tests -v
 ```
 
-Проверяются архив, хеши, метаданные, каталог и ссылки; отдельно — отказы установщика, блокировка повторной записи, восстановление и локальный HTTP-сервер. Тесты не обращаются к роботу. CI запускает их на macOS, Windows и Linux.
+Checks cover the archive, hashes, metadata, catalog and documentation links, plus installer rejection paths, pending-operation locks, recovery, translations and the local HTTP server. Tests do not contact a robot. CI runs on macOS, Windows and Linux.
 
-Код — в `installer/`, русский интерфейс — в `installer/messages.ru.json`. Данные аккаунта существуют только в памяти. Бэкапы и отметки незавершённых операций находятся в исключённой из Git папке `.my_local_dev/`.
+## Where things live
 
-Пакет, манифест, каталог и образцы меняются вместе. Новую совместимость отмечайте только после испытания. Автоматической публикации нет. [Сторонний код](THIRD_PARTY.md) и [источники аудио](docs/sources.md).
+| Path | Purpose |
+|---|---|
+| `installer/` | Cloud client and install/restore logic |
+| `installer/messages.en.json` | English interface |
+| `installer/messages.ru.json` | Russian interface |
+| `voicepack/` | Audio archive, manifest and Russian transcripts |
+| `.my_local_dev/` | Local backups and pending-operation records; excluded from Git |
+
+Keep both documentation languages in sync. Message keys and format placeholders must match between languages. Account credentials exist only in memory.
+
+Update the pack, manifest, catalog and samples together. Only claim new compatibility after a device test. There is no automatic publication. See [third-party code](THIRD_PARTY.md) and [audio sources](docs/sources.md).

@@ -1,21 +1,42 @@
-# Dreame L10s Ultra Gen 2 — русская озвучка
+<div align="center">
 
-**«Кожаные ублюдки» · Maxim · 18+**
+# Dreame L10s Ultra Gen 2
 
-556 речевых событий, 8 сигналов, 501 уникальная запись — около 42 минут.
+**A Russian voice pack with attitude.**
 
-## Запуск
+Leather Bastards · Maxim · **18+ / explicit language**
 
-Скачайте **Code → Download ZIP**, распакуйте. Нужен [Python 3.11+](https://www.python.org/downloads/).
+**English** · [Русский](README.ru.md)
+
+</div>
+
+| Spoken events | Unique recordings | Audio |
+|:---:|:---:|:---:|
+| **556** | **501** | **≈ 42 min** |
+
+## Get started
+
+1. Install [Python 3.11+](https://www.python.org/downloads/).
+2. Download **Code → Download ZIP** and extract it.
+3. Run the launcher:
 
 | macOS | Windows | Linux |
 |---|---|---|
-| Открыть `start.command` | Открыть `start.cmd` | `sh start.sh` |
+| `start.command` | `start.cmd` | `sh start.sh` |
 
-Войдите в Dreamehome и выберите **«Установить»**, **«Сохранить комплект отката»** или **«Вернуть штатный голос»**. Компьютер и робот должны быть в одной локальной сети. Пароль не сохраняется.
+In the menu: **language → Dreamehome EU login → Install voice pack**.
+Use the same home network. Dock the robot with at least **50%** battery.
 
-**Только `r2469x` · `4.3.9_1642` · Dreamehome EU.** Бэкап сохраняет состояние и штатный RU-пакет, а не извлекает текущую озвучку из робота. Новый скрипт ещё не проверен полной установкой на устройстве.
+**Supported:** `r2469x` · `4.3.9_1642` · EU.
 
-[▶ Поиск](samples/find.ogg?raw=1) · [▶ Уборка](samples/cleaning.ogg?raw=1) · [▶ Промывка](samples/washing.ogg?raw=1) · [▶ Сушка](samples/drying.ogg?raw=1)
+> Pack tested on one robot. The new installer's full install and restore cycle is still untested on a device.
 
-[Инструкция](docs/installation.md) · [Совместимость](docs/compatibility.md) · [Все фразы](voicepack/events.json) · [Источники](docs/sources.md) · [Проверки](CONTRIBUTING.md)
+## Listen
+
+[▶ Find me](samples/find.ogg?raw=1) · [▶ Cleaning](samples/cleaning.ogg?raw=1) · [▶ Mop washing](samples/washing.ogg?raw=1) · [▶ Drying](samples/drying.ogg?raw=1)
+
+## Backup & restore
+
+The installer saves a **stock Russian recovery pack**, not your current custom voice. Use **Restore stock Russian voice** to roll back. Your password is never saved.
+
+[Installation & help](docs/installation.md) · [Compatibility](docs/compatibility.md) · [Phrase catalog](voicepack/events.json) · [Credits](docs/sources.md) · [Development](CONTRIBUTING.md)
