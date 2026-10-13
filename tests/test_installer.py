@@ -1,3 +1,4 @@
+from contextlib import contextmanager
 import hashlib
 import json
 from pathlib import Path
@@ -210,15 +211,20 @@ class WorkflowTests(unittest.TestCase):
             client = Mock()
             client.info.return_value = DEVICE
             client.snapshot.side_effect = [state(), state(), state("downloading", 25), state()]
+            completed = None
 
             def download(device, package, url):
                 with build_opener(ProxyHandler({})).open(url) as response:
                     self.assertEqual(response.read(), DATA)
+                self.assertTrue(completed.wait(timeout=5), "Server did not confirm the download")
 
             client.install.side_effect = download
 
+            @contextmanager
             def serve(data, address):
-                return serve_package(data, address, allow_loopback=True)
+                nonlocal completed
+                with serve_package(data, address, allow_loopback=True) as (url, completed):
+                    yield url, completed
 
             with (patch.object(voicepack, "ROOT", root),
                   patch.object(voicepack, "LOCAL", root / ".my_local_dev"),
